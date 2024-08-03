@@ -93,7 +93,7 @@ console.log('Todos os testes passaram');
 O projeto possui a seguinte estrutura:
 
 ```
-/meu-projeto
+/01-design-patterns-template-strategy
 |-- /data
 |   |-- cidades-1.json
 |   |-- cidades-2.json

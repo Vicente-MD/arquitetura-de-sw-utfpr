@@ -1,19 +1,17 @@
-import CidadesHTMLReport from './src/CidadesHTMLReporter.js';
-import CidadesTXTReport from './src/CidadesTXTReporter.js';
+// index.js
+import ReportFactory from './src/ReportFactory.js';
 
-const [cmd, filename, format] = process.argv;
+const [node, script, filename, format] = process.argv;
 
-if (format === 'html') {
-  let reporter = new CidadesHTMLReport();
-  reporter.ler('./data/cidades-2.json');
+console.log('Filename:', filename);
+console.log('Format:', format);
+
+try {
+  let reporter = ReportFactory.createReport(format);
+  reporter.read(filename); 
   reporter.parse();
-  let html = reporter.reportar();
-  console.log(html);
-}
-if (format === 'txt') {
-  let reporter = new CidadesTXTReport();
-  reporter.ler('./data/cidades-2.json');
-  reporter.parse();
-  let txt = reporter.reportar();
-  console.log(txt);
+  let output = reporter.report(); 
+  console.log(output);
+} catch (error) {
+  console.error('Erro:', error.message);
 }

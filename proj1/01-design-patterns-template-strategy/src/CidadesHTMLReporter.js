@@ -1,16 +1,18 @@
+// src/CidadesHTMLReporter.js
 import * as fs from 'node:fs';
+import IReport from './IReport.js';
 
-export default class CidadesHTMLReport {
+export default class CidadesHTMLReporter extends IReport {
 
-  ler (caminho) {
-    this.cidades = fs.readFileSync(caminho);
+  read(path) {
+    this.cities = fs.readFileSync(path);
   }
 
-  parse () {
-    this.cidades = JSON.parse(this.cidades);
+  parse() {
+    this.cities = JSON.parse(this.cities);
   }
 
-  reportar() {
+  report() {
     let result = `
   <!DOCTYPE HTML>
   <html>
@@ -23,8 +25,8 @@ export default class CidadesHTMLReport {
       <ul>
   `;
 
-    for (let i = 0; i < this.cidades.length; i++) {
-      result += '     <li>' + this.cidades[i]['Nome'] + '</li>\n';
+    for (let i = 0; i < this.cities.length; i++) {
+      result += '     <li>' + this.cities[i]['Nome'] + '</li>\n';
     }
 
     result += `

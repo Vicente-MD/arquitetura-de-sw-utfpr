@@ -1,24 +1,24 @@
+// src/CidadesTXTReporter.js
 import * as fs from 'node:fs';
+import IReport from './IReport.js';
 
-export default class CidadesTXTReporter {
+export default class CidadesTXTReporter extends IReport {
 
-  ler (caminho) {
-    this.cidades = fs.readFileSync(caminho);
+  read(path) {
+    this.cities = fs.readFileSync(path);
   }
 
-  parse () {
-    this.cidades = JSON.parse(this.cidades);
+  parse() {
+    this.cities = JSON.parse(this.cities);
   }
 
-  reportar() {
-    let result = `Relatório de Nomes de Cidades
-=============================`;
+  report() {
+    let result = `Relatório de Nomes de Cidades\n=============================\n`;
 
-    for (let i = 0; i < this.cidades.length; i++) {
-      result += '* ' + this.cidades[i]['Nome'] + '\n';
+    for (let i = 0; i < this.cities.length; i++) {
+      result += '* ' + this.cities[i]['Nome'] + '\n';
     }
 
     return result;
   }
 }
-
